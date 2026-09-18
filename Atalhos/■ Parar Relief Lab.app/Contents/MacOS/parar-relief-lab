@@ -1,0 +1,15 @@
+#!/bin/zsh
+# A raiz do projeto vem da posicao do proprio .app:
+# Atalhos/<nome>.app/Contents/MacOS/<exe> -> sobe cinco niveis.
+PROJETO="${0:A:h:h:h:h:h}"
+RUNNER="$PROJETO/scripts/parar-relief-lab.sh"
+
+if [[ ! -x "$RUNNER" ]]; then
+  /usr/bin/osascript -e "display alert \"Relief Lab\" message \"Não achei $RUNNER. O atalho precisa ficar dentro da pasta Atalhos do projeto.\""
+  exit 1
+fi
+
+"$RUNNER"
+RESULT=$?
+
+exit "$RESULT"
